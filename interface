@@ -1,0 +1,106 @@
+// A interface comum para todos os produtos
+interface Computador {
+    public int getRam();
+    public int getHdd();
+    public double getCpu();
+    public String getType();
+}
+
+class PC implements Computador {
+    private int ram;
+    private int hdd;
+    private double cpu;
+    private String type;
+
+    public PC(int ram, int hdd, double cpu) {
+        this.ram = ram;
+        this.hdd = hdd;
+        this.cpu = cpu;
+        this.type = "PC";
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public int getHdd() {
+        return hdd;
+    }
+
+    public double getCpu() {
+        return cpu;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String toString() {
+        return "RAM: " + ram + " GB, HDD: " + hdd + " GB, CPU: " + cpu + " GHz, Type: " + type;
+    }
+}
+
+class Server implements Computador {
+    private int ram;
+    private int hdd;
+    private double cpu;
+    private String type;
+
+    public Server(int ram, int hdd, double cpu) {
+        this.ram = ram;
+        this.hdd = hdd;
+        this.cpu = cpu;
+        this.type = "Server";
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public int getHdd() {
+        return hdd;
+    }
+
+    public double getCpu() {
+        return cpu;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String toString() {
+        return "RAM: " + ram + " GB, HDD: " + hdd + " GB, CPU: " + cpu + " GHz, Type: " + type;
+    }
+}
+
+class ComputadorFactory {
+
+    public static Computador createComputador(String type, int ram, int hdd, double cpu) {
+        if (type.equalsIgnoreCase("PC")) {
+            return new PC(ram, hdd, cpu);
+        } else if (type.equalsIgnoreCase("Server")) {
+            return new Server(ram, hdd, cpu);
+        } else {
+            return null;
+        }
+    }
+}
+
+class Cliente {
+    public static void main(String[] args) {
+
+        Computador pc = ComputadorFactory.createComputador("PC", 8, 500, 3.2);
+        Computador server = ComputadorFactory.createComputador("Server", 16, 1000, 4.0);
+
+        System.out.println(pc);
+        System.out.println(server);
+        
+        /*
+         * A saída esperada é:
+         * RAM: 8 GB, HDD: 500 GB, CPU: 3.2 GHz, Type: PC
+         * RAM: 16 GB, HDD: 1000 GB, CPU: 4.0 GHz, Type: Server
+         */
+        
+     }
+}
